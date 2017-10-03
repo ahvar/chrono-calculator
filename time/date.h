@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
+#include "day.h"
 
 #define ONEYEAR 365 // days in a year 
 #define TWENTYFOUR 24
@@ -16,13 +17,30 @@
 /** The Months */
 enum class Month {
   jan = 1, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec
-};
+}; 
+
 
 /** Prefix increment operator 
     @param m the memory address of the month
     @return m the month
 */
-Month operator++( Month &m, int );
+Month &operator++( Month &m, int );
+
+/** Less than operator
+    @param m1 the month to be compared
+    @param m2 the month to be compared
+    @return true if m1 is less than m2
+*/
+bool operator<( Month m1, Month m2 );
+
+/** Greater than operator
+    @param m1 the month to be compared
+    @param m2 the month to be compared
+    @return true if m1 is greater than m2
+*/
+bool operator>( Month m1, Month m2 );
+
+
 
 /** 
   Overloading operator for printing Month 
@@ -85,7 +103,7 @@ public:
     @param d the day
     @param y the year
   */
-  Date( Month mm, int dd, Year yy );
+  Date( Month mm, int dd, Year yy, int hh, int ss );
 
   /** 
     Default constructor sets the date to 01/01/1800.
@@ -111,13 +129,9 @@ private:
   /** The Month */
   Month m;
   /** The day */
-  int d;
+  Day d;
   /** The year. Must fall between 1800 - 2099. */
   Year y;
-  /** counts the hours */
-  int h;
-  /** counts the seconds */
-  int s;
 
 };
 

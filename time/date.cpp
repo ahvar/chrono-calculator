@@ -24,6 +24,7 @@ Date::Date()
   m = Month::jan;
   d = 1;
   y = Year::min;
+
 }
 
 Year::Year( int yy )
@@ -74,14 +75,14 @@ Date &Date::operator++( int )
 
 }
 
+
 std::ostream &operator<<( std::ostream &os, const Date &d )
 {
-  // this may not work because << is not overloaded for printing classes year
-  // m is an enum so it has one of only a set of integer values
   os << d.m << "/" << d.d << "/" << d.y;
   return os;
 
 }
+
 
 std::ostream &operator<<( std::ostream &out, const Year &yy )
 {
@@ -91,12 +92,35 @@ std::ostream &operator<<( std::ostream &out, const Year &yy )
 
 std::ostream &operator<<( std::ostream &out, const Month &mm )
 {
-  out << mm;
+  int num = static_cast<int>(mm);
+  out << num;
   return out;
 }
 
-Month operator++( Month &m, int )
+Month &operator++( Month &m, int )
 {
   m = (m==Month::dec) ? Month::jan : Month(int(m)+1); 
   return m;
+}
+
+bool operator<( Month m1, Month m2 )
+{
+  int int1 = static_cast<int>(m1);
+  int int2 = static_cast<int>(m2);
+  if ( int1 < int2 )
+    return true;
+  else 
+    return false;
+
+}
+
+bool operator>( Month m1, Month m2 )
+{
+  int int1 = static_cast<int>(m1);
+  int int2 = static_cast<int>(m2);
+  if ( int1 > int2 )
+    return true;
+  else 
+    return false;
+
 }
