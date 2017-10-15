@@ -1,9 +1,5 @@
-CFLAGS = -Wall -std=c++0x
+CFLAGS = -g -Wall -std=c++0x
 
-planner: planner.o date.o
-	
-planner.o: date.h
+trader: analyzer.o stock.o portfolio.o location.o
 
-clean:
-	-rm -f *.o
-	-rm -f planner
+location.o: location.h

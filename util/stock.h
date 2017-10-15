@@ -1,11 +1,11 @@
 /**
   Header file for stock declares the classes for stocks
 */
-
 #include <iostream>
 #include <cstdio>
 #include <string>
 #include <cstdlib>
+#include <vector>
 
 /**
   The Share class represents a single share of Stock
@@ -16,10 +16,10 @@ public:
     Constructs a Share with a price.
     @param p the price of one share
   */
-  Share( int p ) : price{p} {}
+  Share( double p ) : price{p} {}
 private:
   /** The price of theh Share */
-  int price;
+  double price;
 };
 
 
@@ -38,9 +38,10 @@ public:
   Stock( std::string nm, std::string tkr, int qty ) {
     name = nm;
     ticker = tkr;
-    issueOutstanding( shares, qty );
+    issueOutstanding( qty );
   }
 
+  /** Default constructor */
   Stock(){}
   
   /**
@@ -50,7 +51,7 @@ public:
     @param qty the number of shares to be issued
     @return a reference to the vector of shares
   */  
-  vector<Share> &issueOutstanding( vector<Share> &vec, int qty );
+  vector<Share> &issueOutstanding( int qty );
 
   /**
     Returns a average price for a Stock over a given number of days.
@@ -71,9 +72,43 @@ public:
 
 private:
   /** The name of the stock */
-  string name;
+  std::string name;
   /** The ticker for the stock */
-  string ticker;
+  std::string ticker;
   /** The number of shares currently */
-  vector<Share> shares;
+  std::vector<Share> shares;
+};
+
+
+/**
+  Portfolio
+*/
+class Portfolio {
+public:
+  
+  /** 
+    Constructs a portfolio from the list of stocks.
+    
+    @param list a list of stocks
+  */
+  Portfolio( std::vector<Stock> list) : stocks(list){}
+
+  /** Default constructor */
+  Portfolio();
+
+  /** 
+    Overloads the right shift operator to output the Portfolio name, each stock in the portfolio, and the total amount invested, to the console.
+     
+    @param out reference to ostream
+    @param ptfo reference to Portfolio to be output
+    @return out reference to ostream
+  */
+  friend std::ostream &operator<<( std::ostream &out, Portfolio &ptfo );
+
+private:
+  /** The total value in the portfolio */
+  double total;
+  /** A list of stocks */
+  std::vector<Stock> stocks;
+
 };
