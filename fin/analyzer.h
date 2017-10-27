@@ -1,7 +1,8 @@
 /**
   The analyzer header file declares the analyzer class and functions.
 */
-#include "fin/portfolio.h"
+#include "portfolio.h"
+#include "../util/location.h"
 
 class Analyzer {
 public:
@@ -22,6 +23,5 @@ public:
 private:
   /** A portfolio of securities */
   Portfolio portfolio;  
-
 
 };

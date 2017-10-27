@@ -1,19 +1,23 @@
-objects = portfolio.o security.o location.o analyzer.o
+objects = security.o portfolio.o analyzer.o location.o
 CFLAGS = -std=c++0x -Wall
-VPATH = fin:util
+VPATH = util:fin
 
-investor: $(objects)
-	g++ $(CFLAGS) -o investor $(objects)
+investor: $(objects)	
+	g++ $(CFLAGS) $(objects) -o investor
+
+analyzer.o: analyzer.cpp analyzer.h portfolio.h security.h location.h
+	g++ -c $(CFLAGS) $< -o $@
 	
-analyzer.o: analyzer.h
-	g++ $(CFLAGS) -c $@ $^
-portfolio.o: portfolio.h security.h
-	g++ $(CFLAGS) -c $@ $^
-security.o: security.h
-	g++ $(CFLAGS) -c $@ $^
-location.o: location.h
-	g++ $(CFLAGS) -c $@ $^
+portfolio.o: portfolio.cpp portfolio.h security.h
+	g++ -c $(CFLAGS) $< -o $@
+
+security.o: security.cpp security.h
+	g++ -c $(CFLAGS) $< -o $@
+
+location.o: location.cpp location.h
+	g++ -c $(CFLAGS) $< -o $@
+
 .PHONY: clean
 
 clean:
-	rm investor $(objects)
+	rm analyzer $(objects)
