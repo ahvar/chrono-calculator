@@ -9,7 +9,7 @@ class Portfolio {
 public:
   
   /** 
-    Constructs a portfolio from the list of stocks.
+    Constructs a portfolio.
     
     @param list a list of pointers to Stocks.
   */
@@ -19,8 +19,13 @@ public:
   Portfolio(){}
 
   /** 
-    Overloads the right shift operator to output the Portfolio name, each stock in the portfolio, and the total amount invested, to the console.
-     
+    Adds the Security s to this portfolio.
+    @param s the security to the vector of stocks
+  */
+  void addStock( Stock *s ) { stocks.push_back(s); }
+
+  /** 
+    Overloads the right shift operator to output the Portfolio name, each stock in the portfolio, and the total amount invested, to the console. 
     @param out reference to ostream
     @param ptfo reference to Portfolio to be output
     @return out reference to ostream
@@ -32,5 +37,7 @@ private:
   double total;
   /** A list of stocks */
   std::vector<Stock *> stocks;
+  /** Description of the amount of risk in this portfolio as either, "conservative", "moderate", "aggressive". */
+  std::String risk;
 
 };

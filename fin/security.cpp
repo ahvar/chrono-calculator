@@ -5,7 +5,20 @@
 
 std::ostream &operator<<( std::ostream &out, Stock &st )
 {
-  out << st.name << " (" << st.ticker << ") " << ": " << st.value << "Mkt Cap: " << st.mktcap << std::endl;
-  //out << st.name + " (" + st.ticker + "): " + '\t' + st.value + "Mkt Cap: " + st.mktcap + '\n';
+  out << st.name << " (" << st.ticker << ")" << ": " << st.value << '\t' << "Mkt Cap: ";
+  printf("$%f\n", st.mktcap);
   return out;
+}
+
+void addShare( double price )
+{
+
+
+
+}
+
+double removeShare()
+{
+
+
 }

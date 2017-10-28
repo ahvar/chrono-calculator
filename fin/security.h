@@ -30,7 +30,7 @@ protected:
     Returns the market capitalization for this security
     @return mktcap the market capitalization
   */
-  virtual long getMktCap(){ return mktcap; }
+  virtual double getMktCap(){ return mktcap; }
 
   /**
     Returns the value for this security
@@ -45,9 +45,9 @@ protected:
 
 
   /** The value in USD */
-  double value;	
+  double value; 
   /** Market Capitalization */
-  long mktcap;
+  double mktcap;
 };
 
 
@@ -55,6 +55,13 @@ protected:
   A security that can be bought and sold. The stock has a name, a ticker, and a quantity of shares.
 */
 class Stock : public Security {
+  struct Share {
+    /** Share price */
+    double price;
+    /** Pointer to the next share */
+    Share *next;
+  }
+  Share *head;
 
 public:
   /** 
@@ -73,6 +80,19 @@ public:
 
   /** Default constructor */
   Stock(){}
+
+  /** 
+    Adds a share at this price to the stock
+    @param price the price of the share
+  */
+  void addShare( double price );
+  
+  /** 
+    Removes a share from the front
+    @return double the price 
+  */
+  double removeShare();
+
   
   /**
     Increases the total shares outstanding by the quantity passed in as an argument. Recalculates the market capitalization.
@@ -102,7 +122,7 @@ private:
   /** The ticker for the stock */
   std::string ticker;
   /** The number of shares currently */
-  long shares;
+  int shares;
 
 
 };
