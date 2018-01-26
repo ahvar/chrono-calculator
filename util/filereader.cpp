@@ -3,24 +3,38 @@
 */
 #include "filereader.h"
 
-FileReader( std::vector<std::string *> f )
+FileReader::FileReader( std::vector<std::string *> s )
 {
-  files = new FILE *();
-  for ( std::vector<std::string *>::iterator it = f.begin(); it != f.end(); it++ ) {
-    files = fopen(*it, "r");
-    if ( files == NULL ) {
+  std::vector<FILE *> fptr;
+  for ( std::vector<std::string *>::iterator it = s.begin(); it != s.end(); it++ ) {
+    fptr = fopen(*it, "r");
+    if ( fptr == NULL ) {
       std::cout << "Can't open " << *it << std::endl;
-      exit(EXIT_FAILURE);
+      std::exit(EXIT_FAILURE);
     }
-    files++;
+    fptr.push_back(fptr);
+    fptr++;
+    
   }
+  FileReader::setFiles( fptr );
+  std::fclose(fptr);
+
+}
+
+void readFile( FILE *f )
+{
+  std::string s = new std::string(50);
+  fgets( s, 
 
 
 }
 
-
-std::vector<Stock *> FileReader::load()
+Stock *FileReader::loadPrices()
 {
+  FILE *fptr = FileReader::getFiles();
+  for ( std::vector<std::FILE *>::iterator it = FileReader::getFiles().begin(); it != FileReader::getFiles().end(); it++ )
+    std::fgets(      
+
   
 
 }

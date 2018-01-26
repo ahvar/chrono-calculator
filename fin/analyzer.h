@@ -4,6 +4,17 @@
 #include "portfolio.h"
 #include "../util/location.h"
 
+string getFileNames();
+
+void readFile( ifstream ifs )
+{
+  string line;
+  while(ifs >> line)
+    cout << line;
+
+
+}
+
 class Analyzer {
 public:
   /** 

@@ -1,6 +1,5 @@
 #include "market.h"
 
-
 Market::Market( std::vector<string> fn )
 {
   

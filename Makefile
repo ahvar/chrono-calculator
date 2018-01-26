@@ -23,4 +23,4 @@ location.o: location.cpp location.h
 .PHONY: clean
 
 clean:
-	rm investor $(objects) *.*~
+	rm investor $(objects) *.*~ fin/*.*~ util/*.*~

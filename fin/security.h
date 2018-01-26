@@ -1,7 +1,6 @@
 /**
   Defines the classes for different types of tradable financial assets.
 */
-
 #include <iostream>
 #include <cstdio>
 #include <string>
@@ -55,15 +54,9 @@ protected:
   A security that can be bought and sold. The stock has a name, a ticker, and a quantity of shares.
 */
 class Stock : public Security {
-  struct Share {
-    /** Share price */
-    double price;
-    /** Pointer to the next share */
-    Share *next;
-  }
-  Share *head;
 
 public:
+
   /** 
     Constructs a Stock with a name, ticker, and number of outstanding shares. The constructor sets the name and ticker to the appropriate fields and calls the
     issueOutstanding function to grow the share vector.
@@ -80,27 +73,38 @@ public:
 
   /** Default constructor */
   Stock(){}
+  /** 
+    The destructor for the Stock class
+  */
+  ~Stock();
 
   /** 
-    Adds a share at this price to the stock
+    Adds a share at the current price to the list of shares and increments 'shares'.
     @param price the price of the share
   */
-  void addShare( double price );
+  void addShare( double p );
+
+  /**
+    A financial institution buys x number of shares of this stock.
+    @param fi a pointer to the financial institution buying the shares
+    @param x the number of shares to purchase
+    @return true if the FI was able to buy the shares, false otherwise
+  */
+  bool buyStock( FI *fi, int x );
   
   /** 
-    Removes a share from the front
+    Removes a share from the front, decrements the count of 'shares', and returns the price of the share.
     @return double the price 
   */
   double removeShare();
 
-  
   /**
     Increases the total shares outstanding by the quantity passed in as an argument. Recalculates the market capitalization.
 
     @param qty the number of shares to be issued
     @return a reference to the vector of shares
   */  
-  void issueShares( int qty ) { shares += qty; mktcap = mktcap * shares; }
+  void issueShares( int qty );
  
   /** 
     Prints the name, ticker, stock price, and market cap
@@ -124,5 +128,7 @@ private:
   /** The number of shares currently */
   int shares;
 
+  /** Enum of stock names */
+  enum class StockName { "Cardinal Health", "Harley Davidson", "Dextera Surgical", "Arqule Pharmaceutical" }; 
 
 };

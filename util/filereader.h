@@ -1,6 +1,8 @@
 /**
   Header file for the filereader class, which reads price data from a text file and stores it into the respective value fields in stocks and securities classes.
 */
+#ifndef FILEREADER_H_
+#define FILEREADER_H_
 
 #include <cstdio>
 #include <iostream>
@@ -9,15 +11,22 @@
 #include <cstdlib>
 #include "../fin/security.h"
 
+
 /**
-  The FileReader class contains operations for reading data price data from a text file.
+  The FileReader class contains operations for reading price data from a text file.
 */
 class FileReader {
   /**
     A FileReader can be constructed from a list of strings, each representing a relative file path for price data of a given stock or security.
-    @param sList a list of file paths
+    @param f a pointer to FILE
   */
-  FileReader( std::vector<std::string *> f );
+  FileReader( std::FILE *f );
+  
+  /**
+    A FileReader can be constructed from a list of strings, each representing a filename or filepath.
+    @param s a list of filenames
+  */
+  FileReader( std::vector<std::string> s );
 
   /**
     The default constructor for FileReader
@@ -29,17 +38,32 @@ class FileReader {
     @throw exception if any problem reading files
     @return list of stocks
   */
-  std::vector<Stock *> loadStocks();
+  Stock *loadPrices();
 
   /**
     Returns a list of pointers to file streams
     @return files the list of file pointers
   */
-  std::vector<FILE *> getFiles(){ return files; }
+  std::FILE *getFiles(){ return files; }
+
+  /**
+    Sets the list of file pointers to FileReader's value field 'files'.
+    @param fp pointer to the first element in a list of file pointers
+  */
+  void setFiles( FILE *fp ) { files = fp; } 
+
+  /**
+    Reads a text file with price data
+    @param f a pointer to the file object
+  */
+  void readFile( FILE *f );
 
 private:
   /** Pointer to an input stream to historical stock pricing*/
   std::vector<FILE *> files;
+  /** price data */
+  std::vector<string> data;
 };
 
 
+#endif
