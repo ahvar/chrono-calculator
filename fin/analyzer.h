@@ -3,15 +3,15 @@
 */
 #include "portfolio.h"
 #include "../util/location.h"
+#include "market.h"
 
-string getFileNames();
+std::string getFileNames();
 
-void readFile( ifstream ifs )
+void readFile( std::ifstream ifs )
 {
-  string line;
+  std::string line;
   while(ifs >> line)
-    cout << line;
-
+    std::cout << line;
 
 }
 

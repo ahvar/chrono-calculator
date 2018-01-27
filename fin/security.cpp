@@ -20,5 +20,5 @@ void addShare( double price )
 double removeShare()
 {
 
-
+  return 0;
 }

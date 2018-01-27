@@ -7,7 +7,7 @@ Market Modeler analyzes historical price data for tradable financial assests and
 
 # Getting Starting
 
-  - Market Modeler is run and operated from the command line and can 
+  - Market Modeler is run and operated from the command line
   - Drag and drop images (requires your Dropbox account be linked)
 
 
@@ -28,7 +28,7 @@ Markdown is a lightweight markup language based on the formatting conventions th
 
 This text you see here is *actually* written in Markdown! To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.
 
-### Usage
+## Usage
 
 Market Modeler repeatedly prompts the user for a command using the following prompt
 
@@ -36,22 +36,31 @@ Market Modeler repeatedly prompts the user for a command using the following pro
 
  There is a space after the angle bracket. The number in the prompt starts at 1 and increments each time the prompt is printed. There are several commands available to the user (see next section). Each 
 
-### Tech
+## Design
 
-Market Modeler was developed on :
+###### Components
 
-* [AngularJS] - HTML enhanced for web apps!
-* [Ace Editor] - awesome web-based text editor
-* [markdown-it] - Markdown parser done right. Fast and easy to extend.
-* [Twitter Bootstrap] - great UI boilerplate for modern web apps
-* [node.js] - evented I/O for the backend
-* [Express] - fast node.js network app framework [@tjholowaychuk]
-* [Gulp] - the streaming build system
-* [Breakdance](http://breakdance.io) - HTML to Markdown converter
-* [jQuery] - duh
+* [Analyzer] - The analyzer class outputs statistics for a portfolio of stocks.
 
-And of course Dillinger itself is open source with a [public repository][dill]
- on GitHub.
+* [Bank] - The bank class represents a financial institution.
+
+* [Market] - The market represents all of the stocks that currently trade.
+
+* [Portfolio] - Portfolio is a select group of securities held by an individual trader or investment firm. The securities are stored in a vector and provide functionality for adding, removing, and sorting the list of securities. 
+
+* [Security] - Defines the classes for different types of tradable financial assets. At the most basic level, a Security has a valuevand a market capitalization. Security is an abstract class and is the base class for Stock.
+
+* [Stock] - A security that can be bought and sold. The stock has a name, a ticker, and a quantity of shares. The Stock can
+  be bought by a trader or investment firm and the Stock can print out the issuing company.
+
+* [Day] - A day
+
+* [Filereader] - Reads historical price data from a text file into the modeler.
+
+* [Location] -   Location describes a physical location in the USA with an address, description of the environment 
+  (e.g. rural, urban, suburban), latitude, and longitude.
+
+* [Stocklist] - StockList is a doubly linked list of Stocks. It provides basic functionality for constructing a list of stocks,adding, removing, and sorting stocks by price. Overloaded constructors enable a few different options for construction.The Node class contains a Stock, a pointer to the previous Node, and a pointer to the successor Node. The Node class is nested in StockList, giving StockList access to Node's members.
 
 ### Installation
 

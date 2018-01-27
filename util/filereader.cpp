@@ -5,7 +5,7 @@
 
 FileReader::FileReader( std::vector<std::string *> s )
 {
-  std::vector<FILE *> fptr;
+  std::vector<std::FILE *> fptr;
   for ( std::vector<std::string *>::iterator it = s.begin(); it != s.end(); it++ ) {
     fptr = fopen(*it, "r");
     if ( fptr == NULL ) {
@@ -18,13 +18,11 @@ FileReader::FileReader( std::vector<std::string *> s )
   }
   FileReader::setFiles( fptr );
   std::fclose(fptr);
-
 }
 
 void readFile( FILE *f )
 {
   std::string s = new std::string(50);
-  fgets( s, 
 
 
 }
@@ -33,7 +31,7 @@ Stock *FileReader::loadPrices()
 {
   FILE *fptr = FileReader::getFiles();
   for ( std::vector<std::FILE *>::iterator it = FileReader::getFiles().begin(); it != FileReader::getFiles().end(); it++ )
-    std::fgets(      
+     
 
   
 

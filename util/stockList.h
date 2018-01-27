@@ -1,20 +1,17 @@
 /**
-  StockList is a linked list of Stocks sorted by Stock price. 
+  StockList is a doubly linked list of Stocks. It provides basic functionality for constructing a list of stocks,
+  adding, removing, and sorting stocks by price. Overloaded constructors enable a few different options for construction.
+  The Node class contains a Stock, a pointer to the previous Node, and a pointer to the successor Node. The Node class is
+  nested in StockList, giving StockList access to Node's members.  
 */
 
-#include <iostream>
-#include <cstdlib>
-#include <string>
 #include <fstream>
 #include <istream>
 #include <sstream>
-#include <cstdio>
 #include <ostream>
-#include <cmath>
 #include <stdexcept>
 #include <vector>
 #include "../fin/security.h"
-
 
 class StockList{
 
@@ -38,8 +35,9 @@ class StockList{
   StockList(int x);
 
   /**
-    Constructs a StockList with three Nodes. Assigns one Node's Stock to the parameter s, a previous Node pointer to the parameter prev, and the successor Node 
-    pointer to the parameter succ. Head is assigned to the new Node. The length is set to 3.
+    Constructs a StockList with three Nodes. Assigns one Node's Stock to the parameter s, a previous Node pointer to the 
+    parameter prev, and the successor Node pointer to the parameter succ. Head is assigned to the new Node. 
+    The length is set to 3.
 
     @param s the Stock for this Node
     @param prev the pointer to the previous Node
@@ -48,7 +46,7 @@ class StockList{
   StockList( Stock s, Node *prev, Node *succ );
 
   /**
-    Default constructor for a StockList
+    Default constructor for a StockList.
   */
   StockList(){}
 

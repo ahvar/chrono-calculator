@@ -4,7 +4,7 @@ Day::Day &operator++( Day &d, int )
 {
 
   if ( d.today == Day::sunday )
-    d.today = Day::monday );
+    d.today = Day::monday;
   else if ( d.today == Day::monday )
     d.today = Day::tuesday;
   else if ( d.today == Day::tuesday )

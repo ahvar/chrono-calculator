@@ -1,6 +1,6 @@
 #include "market.h"
 
-Market::Market( std::vector<string> fn )
+Market::Market( StockList *list )
 {
   
   for( int i = 0; i < (int) fn.size(); i++ ) {

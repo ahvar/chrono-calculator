@@ -1,23 +1,21 @@
 /**
-  Header file for the filereader class, which reads price data from a text file and stores it into the respective value fields in stocks and securities classes.
+  Header file for the filereader class, which reads price data from a text file and stores it into the respective value 
+  fields in stocks and securities classes.
 */
 #ifndef FILEREADER_H_
 #define FILEREADER_H_
 
-#include <cstdio>
-#include <iostream>
 #include <vector>
 //#include <exception>
-#include <cstdlib>
 #include "../fin/security.h"
 
-
 /**
-  The FileReader class contains operations for reading price data from a text file.
+  The FileReader class reads historical price data from text files and stores it in different data structures.
 */
 class FileReader {
   /**
-    A FileReader can be constructed from a list of strings, each representing a relative file path for price data of a given stock or security.
+    A FileReader can be constructed from a list of strings, each representing a relative file path for price data of a 
+    given stock or security.
     @param f a pointer to FILE
   */
   FileReader( std::FILE *f );

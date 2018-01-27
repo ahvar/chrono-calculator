@@ -2,14 +2,15 @@
 #include <vector>
 
 /**
-  Portfolio is a container for containing securities.
+  Portfolio is a select group of securities held by an individual trader or investment firm. The securities are stored in
+  a vector and provide functionality for adding, removing, and sorting the list of securities. 
 */
 class Portfolio {
 
 public:
   
   /** 
-    Constructs a portfolio.
+    Constructs a portfolio from the list of pointers to stocks passed as the parameter.
     
     @param list a list of pointers to Stocks.
   */
@@ -38,6 +39,6 @@ private:
   /** A list of stocks */
   std::vector<Stock *> stocks;
   /** Description of the amount of risk in this portfolio as either, "conservative", "moderate", "aggressive". */
-  std::String risk;
+  std::string risk;
 
 };

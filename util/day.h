@@ -9,10 +9,12 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
-#include "list.h"
+//#include "list.h"
 #define THIRTYDAYS 30
 #define THIRTYONEDAYS 31
 
+/** the day of the week */
+enum Name { saturday = 6, sunday , monday = 1, tuesday, wednesday, thursday, friday };
 /**
   The Day class defines a day within the particular month of a given year
 */
@@ -26,7 +28,7 @@ public:
       @param h the hour in the day
       @param m the minute in the hour
   */
-  Day( Name n, int n, Hour h, Minute m ) {   today{n}, num{n}, hour{h}, minute{m} };
+  Day( Name nm, int n, Hour h, Minute m ) { today{nm}, num{n}, hour{h}, minute{m} };
 
   /** Constructs an instance of the Day class with a name and number. The hour and minute are both set to zero.
       @param n the name of the day in the week
@@ -34,10 +36,8 @@ public:
       @param h the hour in the day
       @param m the minute in the hour
   */
-  Day( Name n, int n ) { today{n}, num{n}, hour{0}, minute{0} };
+  Day( Name nm, int n ) { today{nm}, num{n}, hour{0}, minute{0} };
   
-  
-
 private:
   /** the day in the month of a given year */
   int num;
@@ -46,7 +46,7 @@ private:
   /** the minute in an hour */
   Minute minute;
   /** the day of the week */
-  enum Name today { saturday = 6, sunday , monday = 1, tuesday, wednesday, thursday, friday };
+  Name today;
   /** a list of ongoing projects */
   List projects; 
 

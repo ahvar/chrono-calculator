@@ -20,14 +20,14 @@ Market *parseLine( string l, Market *m )
 
 }
 
-string *getFileNames()
+std::string *getFileNames()
 {
-  string fn;
-  cout << "Enter filename: ";
-  while(cin) {
-    cin >> fn;
-    ifstream ifs(fn);
-    if(!ifs) cout << "Can't open file." << endl;
+  std::string fn;
+  std::cout << "Enter filename: ";
+  while(std::cin) {
+    std::cin >> fn;
+    std::ifstream ifs(fn);
+    if(!ifs) std::cout << "Can't open file." << endl;
     readFile(ifs);
   }
 

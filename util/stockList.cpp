@@ -1,7 +1,7 @@
 /**
-  Implementation for securitiesList.h
+  Implementation for stockList
 */
-#include "securitiesList.h"
+#include "stockList.h"
 
 StockList::StockList( Stock s, Node *prev, Node *succ )
 {

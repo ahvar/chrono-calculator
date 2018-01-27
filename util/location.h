@@ -1,6 +1,6 @@
 /**
-  Location describes a physical location in the USA with an address, description of the environment (e.g. rural, urban, suburban), latitude, and
-  longitude.
+  Location describes a physical location in the USA with an address, description of the environment 
+  (e.g. rural, urban, suburban), latitude, and longitude.
 
   @file location.h
   @author Arthur Vargas (ahvargas92@gmail.com)
