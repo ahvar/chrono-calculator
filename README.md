@@ -1,42 +1,42 @@
 # Market Modeler
+Market Modeler analyzes historical price data (daily) for a list of stocks or other tradable financial assests. The Market Modeler will output common technical indicators that can be used to determine potential entry and/or exit points to certain stocks. 
 
-Market Modeler analyzes historical price data for tradable financial assests and outputs common technical indicators to the terminal.
-
-  - Load market data
-  - Type in valid commands to compute desired results
-
-# Getting Starting
-Market Modeler is run and operated from the command line. 
-
+## Installing
 1.) Download the files to your computer or fork the repository.
-2.) Open your terminal and navigate to the directory containing Market Modeler's source files.
-3.) Type the **make** command in the root directory. This will build the project.
+2.) Open your terminal or preferred shell program and navigate to the directory containing Market Modeler's source files.
+3.) Compile Market Modeler on your machine by typing the **make** command in Market Modeler's root directory.
 
+ - **c:\market-modeler> make**
 
-You can also:
-  - Import and save files from GitHub, Dropbox, Google Drive and One Drive
-  - Drag and drop markdown and HTML files into Dillinger
-  - Export documents as Markdown, HTML and PDF
-
-Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site][df1]
-
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
-
-This text you see here is *actually* written in Markdown! To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.
+The program is now ready for use.
 
 ## Usage
+Pricing data is contained in text files that are stored in the folder named "data." The text files contain daily price data and have the following data fields in this order: 
 
-Market Modeler repeatedly prompts the user for a command using the following prompt
+ *Date, Opening Price, Daily Price High, Daily Price Low, Closing Price, Yesterday's Closing Price, Today's Trading Volume*
 
- - cmd 1>
+There are two options for loading data into the modeler. 
 
- There is a space after the angle bracket. The number in the prompt starts at 1 and increments each time the prompt is printed. There are several commands available to the user (see next section). Each 
+1.) Include all the data files on the command line with the program.
+
+- **c:\market-modeler> ./investor data/companyA.txt data/companyB.txt data/companyC.txt**
+
+2.) Run the modeler by itself and modeler will repeatedly prompt the user to enter file names separately. 
+
+- **c:\market-modeler> ./investor**
+
+If loading via the second option, use the "load complete" command to tell modeler there are no more files to be loaded. After data has been loaded, Modeler prompts the user for a command:
+
+ - **cmd 1>**
+
+ There is a space after the angle bracket. The number in the prompt starts at 1 and increments each time the prompt is printed. There are several commands available to the user (see next section). 
+
+## Commands
+
+
+
+
+
 
 ## Design
 
@@ -55,7 +55,7 @@ Market Modeler repeatedly prompts the user for a command using the following pro
 * [Stock] - A security that can be bought and sold. The stock has a name, a ticker, and a quantity of shares. The Stock can
   be bought by a trader or investment firm and the Stock can print out the issuing company.
 
-* [Day] - A day
+* [Date] - A day
 
 * [Filereader] - Reads historical price data from a text file into the modeler.
 
@@ -64,61 +64,17 @@ Market Modeler repeatedly prompts the user for a command using the following pro
 
 * [Stocklist] - StockList is a doubly linked list of Stocks. It provides basic functionality for constructing a list of stocks,adding, removing, and sorting stocks by price. Overloaded constructors enable a few different options for construction.The Node class contains a Stock, a pointer to the previous Node, and a pointer to the successor Node. The Node class is nested in StockList, giving StockList access to Node's members.
 
-### Installation
+## Running the Tests
 
-Market Modeler runs from the [Node.js](https://nodejs.org/) v4+ to run.
+## Contributing
 
-Install the dependencies and devDependencies and start the server.
-
-```sh
-$ cd dillinger
-$ npm install -d
-$ node app
-```
-
-For production environments...
-
-```sh
-$ npm install --production
-$ NODE_ENV=production node app
-```
-
-### Plugins
-
-Dillinger is currently extended with the following plugins. Instructions on how to use them in your own application are linked below.
-
-| Plugin | README |
-| ------ | ------ |
-| Dropbox | [plugins/dropbox/README.md] [PlDb] |
-| Github | [plugins/github/README.md] [PlGh] |
-| Google Drive | [plugins/googledrive/README.md] [PlGd] |
-| OneDrive | [plugins/onedrive/README.md] [PlOd] |
-| Medium | [plugins/medium/README.md] [PlMe] |
-| Google Analytics | [plugins/googleanalytics/README.md] [PlGa] |
+## Authors
+ - Arthur Vargas - ahvargas92@gmail.com
 
 
 ### Development
 
-Want to contribute? Great!
 
-Dillinger uses Gulp + Webpack for fast developing.
-Make a change in your file and instantanously see your updates!
-
-Open your favorite Terminal and run these commands.
-
-First Tab:
-```sh
-$ node app
-```
-
-Second Tab:
-```sh
-$ gulp watch
-```
-
-(optional) Third:
-```sh
-$ karma test
 ```
 #### Building for source
 For production release:
@@ -165,28 +121,3 @@ License
 Public
 
 
-**Free Software, Hell Yeah!**
-
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
-
-
-   [dill]: <https://github.com/joemccann/dillinger>
-   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
-   [john gruber]: <http://daringfireball.net>
-   [df1]: <http://daringfireball.net/projects/markdown/>
-   [markdown-it]: <https://github.com/markdown-it/markdown-it>
-   [Ace Editor]: <http://ace.ajax.org>
-   [node.js]: <http://nodejs.org>
-   [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
-   [jQuery]: <http://jquery.com>
-   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
-   [express]: <http://expressjs.com>
-   [AngularJS]: <http://angularjs.org>
-   [Gulp]: <http://gulpjs.com>
-
-   [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
-   [PlGh]: <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>
-   [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
-   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
-   [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
-   [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
