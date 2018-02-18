@@ -1,4 +1,4 @@
-objects = security.o portfolio.o analyzer.o location.o bank.o filereader.o
+objects = date.o security.o portfolio.o analyzer.o location.o bank.o filereader.o
 CFLAGS = -std=c++0x -Wall
 VPATH = util:fin
 
@@ -21,6 +21,9 @@ security.o: security.cpp security.h
 	g++ -c $(CFLAGS) $< -o $@
 
 location.o: location.cpp location.h
+	g++ -c $(CFLAGS) $< -o $@
+
+date.o: date.cpp date.h
 	g++ -c $(CFLAGS) $< -o $@
 
 .PHONY: clean

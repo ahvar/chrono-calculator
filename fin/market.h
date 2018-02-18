@@ -1,8 +1,7 @@
 /**
   A market provides a set of functions for creating and trading securities. 
 */
-#include "../util/tradingDay.h"
-#include "../util/stockList.h"
+#include "../util/date.h"
  
 class Market {
 
@@ -27,4 +26,4 @@ private:
   /** A list of stocks on the market */
   StockList *sl; 
 
-}:
+};

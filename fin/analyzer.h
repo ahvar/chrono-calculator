@@ -1,9 +1,13 @@
 /**
   The analyzer header file declares the analyzer class and functions.
 */
+
+
 #include "portfolio.h"
 #include "../util/location.h"
 #include "market.h"
+
+
 
 std::string getFileNames();
 
@@ -36,3 +40,4 @@ private:
   Portfolio portfolio;  
 
 };
+

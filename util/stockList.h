@@ -13,20 +13,31 @@
 #include <vector>
 #include "../fin/security.h"
 
-class StockList{
+class StockList {
+  
+private:
+
+  /** A list node has a Stock and pointers to its successor node and previous node */
+  class Node;
+  /** List length */
+  int length;
+  /** The first node in the list */
+  Node *head;
+
+public:
 
   /**
     Constructs a StockList with a single node and assigns the head to the node passed into the parameter n.
 
     @param n the head Node in the list
   */
-  StockList( const Node *n ) { head = n; }
+  StockList( Node *n ) { head = n; }
  
   /**
     Constructs a StockList with one Nodes and assigns the head to the reference passed into the parameter n
     @param n a reference to the head Node in the list
   */
-  StockList( const Node &n ) { head = n; }
+  //StockList( Node &n ) { head = n; }
 
   /**
     Constructs an empty StockList with the number of Stocks passed into the parameter. Stock price and volume are set at 0.
@@ -110,41 +121,4 @@ class StockList{
   bool isSortedAscending();
   
 
-private:
-
-  /** 
-    A list node has a Stock and pointers to its successor node and previous node 
-  */
-  class Node{
-  public:
-    /**
-      Constructs a Node with a Stock, pointers to the previous and successor Nodes in the list
-      @param s the Stock
-      @param p a pointer to the previous Node
-      @param sc a pointer to the successor Node
-    */
-    Node ( Stock s, Node *p, Node *sc ) : stock{s}, prev{p}, succ{sc} {}
-
-    /**
-      The default constructor for Node
-    */
-    Node (){}
-  private:
-    /**
-      Default constructor
-    */
-    Node(){}
-    /** The stock */
-    Stock stock;
-    /** A pointer to previous Node in the list */
-    Node *prev;
-    /** A pointer to the successor Node in the list */
-    Node *succ;
-  };
-
-  /** List length */
-  int length;
-  /** The first node in the list */
-  Node *head;
- 
 };

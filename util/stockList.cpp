@@ -3,6 +3,31 @@
 */
 #include "stockList.h"
 
+StockList::Node {
+
+public:
+
+  /**
+    Constructs a Node with a Stock, pointers to the previous and successor Nodes in the list
+    @param s the Stock
+    @param p a pointer to the previous Node
+    @param sc a pointer to the successor Node
+  */
+  StockList::Node::Node ( Stock s, Node *p, Node *sc ) : stock{s}, prev{p}, succ{sc} {}
+
+  /** Default constructor */
+  StockList::Node::Node(){}
+
+private:
+  /** The stock */
+  Stock stock;
+  /** A pointer to previous Node in the list */
+  Node *prev;
+  /** A pointer to the successor Node in the list */
+  Node *succ;
+
+}
+
 StockList::StockList( Stock s, Node *prev, Node *succ )
 {
   head = new Node( Stock stk{"","",0,0}, prev, succ );
@@ -179,6 +204,8 @@ bool StockList::isSortedAscending()
   return true;
 
 }
+
+
 
 
 

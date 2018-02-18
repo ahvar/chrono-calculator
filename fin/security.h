@@ -2,6 +2,9 @@
   Defines the classes for different types of tradable financial assets. At the most basic level, a Security has a value
   and a market capitalization. Security is an abstract class and is the base class for Stock.
 */
+#ifndef SECURITY_H_
+#define SECURITY_H_
+
 #include <iostream>
 #include <cstdio>
 #include <string>
@@ -136,3 +139,5 @@ private:
   enum class StockName { CAH, HOG, DXTR, ARQL }; 
 
 };
+
+#endif

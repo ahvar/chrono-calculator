@@ -1,14 +1,16 @@
 # Market Modeler
 
-Market Modeler analyzes historical price data for tradable financial assests and outputs the results of basic calculations of the security's performance.
+Market Modeler analyzes historical price data for tradable financial assests and outputs common technical indicators to the terminal.
 
   - Load market data
   - Type in valid commands to compute desired results
 
 # Getting Starting
+Market Modeler is run and operated from the command line. 
 
-  - Market Modeler is run and operated from the command line
-  - Drag and drop images (requires your Dropbox account be linked)
+1.) Download the files to your computer or fork the repository.
+2.) Open your terminal and navigate to the directory containing Market Modeler's source files.
+3.) Type the **make** command in the root directory. This will build the project.
 
 
 You can also:
