@@ -1,3 +1,7 @@
+
+#ifndef PORTFOLIO_H_
+#define PORTFOLIO_H_
+
 #include "security.h"
 #include <vector>
 
@@ -18,6 +22,11 @@ public:
 
   /** Default constructor */
   Portfolio(){}
+
+  /**
+    Portfolio destructor
+  */
+  ~Portfolio();
 
   /** 
     Adds the Security s to this portfolio.
@@ -42,3 +51,5 @@ private:
   std::string risk;
 
 };
+
+#endif

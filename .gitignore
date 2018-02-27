@@ -1,2 +1,7 @@
 *.dia
 *.dia~
+*.DAT
+*.DOP
+data/data/*
+*.doc
+*.docx

@@ -1,23 +1,26 @@
-objects = date.o security.o portfolio.o analyzer.o location.o bank.o filereader.o
+objects = date.o security.o portfolio.o stockList.o analyzer.o location.o bank.o filereader.o
 CFLAGS = -std=c++0x -Wall
 VPATH = util:fin
 
-investor: $(objects)	
-	g++ $(CFLAGS) $(objects) -o investor
+modeler: $(objects)	
+	g++ $(CFLAGS) $(objects) -o modeler
 
-filereader.o: filereader.cpp filereader.h analyzer.h portfolio.h security.h location.h bank.h
+filereader.o: filereader.cpp filereader.h analyzer.h bank.h portfolio.h stockList.h security.h location.h bank.h
 	g++ -c $(CFLAGS) $< -o $@
 
-analyzer.o: analyzer.cpp analyzer.h portfolio.h security.h location.h bank.h
+analyzer.o: analyzer.cpp analyzer.h bank.h portfolio.h stockList.h security.h location.h date.h 
 	g++ -c $(CFLAGS) $< -o $@
 
-bank.o: bank.cpp bank.h portfolio.h security.h location.h
+bank.o: bank.cpp bank.h portfolio.h stockList.h security.h location.h date.h
 	g++ -c $(CFLAGS) $< -o $@
 	
-portfolio.o: portfolio.cpp portfolio.h security.h
+portfolio.o: portfolio.cpp portfolio.h stockList.h security.h location.h date.h
 	g++ -c $(CFLAGS) $< -o $@
 
-security.o: security.cpp security.h
+stockList.o: stockList.cpp stockList.h security.h location.h date.h
+	g++ -c $(CFLAGS) $< -o $@
+
+security.o: security.cpp security.h location.h date.h
 	g++ -c $(CFLAGS) $< -o $@
 
 location.o: location.cpp location.h
@@ -29,4 +32,4 @@ date.o: date.cpp date.h
 .PHONY: clean
 
 clean:
-	rm investor $(objects) *.*~ fin/*.*~ util/*.*~
+	rm modeler $(objects) *.*~ fin/*.*~ util/*.*~

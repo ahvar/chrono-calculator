@@ -4,6 +4,8 @@
   The Node class contains a Stock, a pointer to the previous Node, and a pointer to the successor Node. The Node class is
   nested in StockList, giving StockList access to Node's members.  
 */
+#ifndef STOCKLIST_H_
+#define STOCKLIST_H_
 
 #include <fstream>
 #include <istream>
@@ -18,7 +20,35 @@ class StockList {
 private:
 
   /** A list node has a Stock and pointers to its successor node and previous node */
-  class Node;
+  class Node {
+  public:
+    /**
+      Constructs a Node containing a Stock ('stock') and two pointers to Nodes for
+      the previous and successor Nodes in the StockList.
+
+      @param s the Stock
+      @param p a pointer to the previous Node
+      @param sc a pointer to the successor Node
+    */
+    Node( Stock *s, Stock *p, Stock *sc);
+
+    Node( Stock *s );
+
+    /** The default constructor for Node */
+    Node(){}
+    /**
+      Sets the stock instance variable with parameters name, ticker, price, and quantity.
+
+      @param s a pointer to the stock
+    */
+    void setStock( Stock *s);
+    /** The stock */  
+    Stock stock;
+    /** Pointer to the previous Node */
+    Node *prev;
+    /** Pointer to the successor Node */
+    Node *succ;
+  };
   /** List length */
   int length;
   /** The first node in the list */
@@ -27,23 +57,12 @@ private:
 public:
 
   /**
-    Constructs a StockList with a single node and assigns the head to the node passed into the parameter n.
+    Constructs a new StockList with parameter s. It creates the head to contain s and sets the previous and successor
+    Nodes to NULL.
 
-    @param n the head Node in the list
+    @param s the contained in head node
   */
-  StockList( Node *n ) { head = n; }
- 
-  /**
-    Constructs a StockList with one Nodes and assigns the head to the reference passed into the parameter n
-    @param n a reference to the head Node in the list
-  */
-  //StockList( Node &n ) { head = n; }
-
-  /**
-    Constructs an empty StockList with the number of Stocks passed into the parameter. Stock price and volume are set at 0.
-    @param i the number of Stocks in the list
-  */
-  StockList(int x);
+  StockList( Stock *s );
 
   /**
     Constructs a StockList with three Nodes. Assigns one Node's Stock to the parameter s, a previous Node pointer to the 
@@ -54,71 +73,53 @@ public:
     @param prev the pointer to the previous Node
     @param succ the pointer to the successor Node
   */ 
-  StockList( Stock s, Node *prev, Node *succ );
+  StockList( Stock *s, Stock *s1, Stock *s2);
 
   /**
     Default constructor for a StockList.
   */
   StockList(){}
 
-  /**
-    Adds this Node at the end of a StockList.
-
-    @param n the Node to be inserted
-    @return the head Node
-  */
-  Node *insertAtEnd( Node *n );
+  /** Destructor for StockList */
+  ~StockList();
 
   /**
-    Adds a Stock to the front of the list and returns a pointer to the Stock that was added.
-    
-    @param n the Stock to add
-    @return a pointer to the newly added Stock
+    Add Stock s to the front of the list.
+
+    @param s the Stock to be added to the front of the list
+    @return true if the s is successfully added, false otherwise
   */
-  Node *add( Node *n );
+  bool addToFront( Stock *s );
+
+
+  bool addToEnd();
+
+
+  bool insert();
+
+
 
   /**
     Locates the first stock in the list with the price point described by the string parameter
     @param t the price of the target Stock
-    @param p the price point is either open, close, previous close, high, or low
-    @return the target Stock
+    @param nm the name of the stock
+    @return a pointer to the Node
   */
-  Node *find( Node *t, std::string p);
-
-  /**
-    Sorts the list by the price point described by the parameter. The different points are close, previous close, open, high and low. Be default the list is sorted
-    by close.
-
-    @param p description of the price point
-    @return a pointer to the head
-  */
-  Node *sortByPrice( std::string p );
+  Node *find( double t, std::string nm);
 
   /**
     Verifies that the list contains no elements.
     @return true if there are no elements in the list
   */
-  bool isEmpty() { if(length==0) return true; }
+  bool isEmpty();
 
   /**
-    Add a Node to the front of the list and assigns the head to this Node.
-
-    @param n the Node to be added to the front of the list
-    @return a pointer to the head
-  */
-  Node *insertAtFront( Node *n );
-
-  /**
-    Returns a pointer to the last Node in the list
-    @return pointer to the last Node
+    Returns a pointer to the last Stock in the list
+    @return pointer to last Node in the list
   */
   Node *getLast();
-
-  /**
-    Returns true if the list is currently sorted in ascending order by stock price.
-    @return true if sorted in ascending order
-  */
-  bool isSortedAscending();
   
 
 };
+
+#endif  

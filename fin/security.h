@@ -6,8 +6,6 @@
 #define SECURITY_H_
 
 #include <iostream>
-#include <cstdio>
-#include <string>
 #include <cstdlib>
 #include <cmath>
 
@@ -16,7 +14,7 @@
 */
 class Security {
 
-protected:
+public:
 
   /**
     Constructor for Security. Only classes derived from Security are able to call it.
@@ -28,6 +26,8 @@ protected:
     Default constructor for a security. Only classes derived from Security can call the default constructor for Security
   */
   Security(){};
+
+  virtual ~Security();
 
   /**
     Returns the market capitalization for this security
@@ -42,10 +42,17 @@ protected:
   double getValue(){ return value; }
 
   /**
+    Sets the value data field to the parameter v
+    @param double v
+  */
+  void setValue( double v){ value = v; }
+
+  /**
     Prints detail about the Security
   */
   virtual void print() = 0;
 
+protected:
 
   /** The value in USD */
   double value; 
@@ -117,6 +124,43 @@ public:
     Prints the name, ticker, stock price, and market cap
   */
   void print() { std::cout << this << std::endl; }
+  
+  /**
+    Sets the stock name to nm.
+    @param nm the name of the stock
+  */
+  void setName( std::string nm) { name = nm; }
+
+
+  /**
+    Returns the name of the company for this stock.
+    @param name the name of the company
+  */
+  std::string getName() { return name; }
+  
+  /**
+    Sets the ticker to the ticker symbol passed in to parameter tkr
+    @param tkr the ticker symbol used for this stock on the exchange
+  */
+  void setTicker( std::string tkr) { ticker = tkr; }
+
+  /**
+    Returns a string representation of ticker symbol.
+    @return ticker the ticker
+  */
+  std::string getTicker() { return ticker; }
+
+  /**
+    Sets the quantity to the parameter q
+    @param q the number of shares issued for this stock
+  */
+  void setQuantity( int q ) { shares = q; }
+
+  /**
+    Returns the number of shares
+    @return shares the number of shares for this stock
+  */
+  int getQuantity() { return shares;}
 
   /** 
     Overloads the right shift operator to output the Stock name, ticker, and the number of shares outstanding, to the console.
