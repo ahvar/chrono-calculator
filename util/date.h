@@ -3,6 +3,9 @@
   @file day.cpp
   @author Arthur Vargas (ahvargas92@gmail.com)
 */
+#ifndef DATE_H_
+#define DATE_H_
+
 #include <limits>
 #include <ctime>
 #include "StockList.h"
@@ -40,4 +43,4 @@ private:
 
 };
 
-
+#endif

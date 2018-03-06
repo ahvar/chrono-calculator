@@ -5,16 +5,16 @@
 #ifndef FILEREADER_H_
 #define FILEREADER_H_
 
-#include <vector>
 //#include <exception>
 #include <cstdio>
-#include <sstream>
 #include <cstring>
 #include <iostream>
 #include <fstream>
-#include <limits>
+#include <locale>
 #include <ios>
-#include "../fin/security.h"
+#include "stockList.h"
+#include "date.h"
+
 
 /**
   The FileReader class reads historical price data from text files and stores it in different data structures.

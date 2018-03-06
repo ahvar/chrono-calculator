@@ -3,11 +3,50 @@
 */
 #include "filereader.h"
 
-void readFile( char *fn )
+
+void readLine( std::string line )
 {
-  std::ifstream ifs(fn);
+  Stock *stock;
+  Date *date;
+  std::istringstream iss(line);
+  std::string word;
+  iss.exceptions(std::ios_base::badbit | std::ios_base::failbit);
+  try {
+    std::getline(iss,word,',');
+      
+  } catch(...) {
+      if(iss.fail()) {
+        std::cout << "Something unexpected happened while reading a line." << std::endl;
+        continue;
+      } else if(iss.bad())
+        std::cout << "Something serious happened while reading a line." << std::endl;
+    }
+  }
+
+
+}
+
+void readFile( std::ostringstream &oss )
+{
+
+  std::ifstream ifs{oss.str()};
+  std::string line;
   ifs.exceptions(std::ios_base::badbit | std::ios_base::failbit);
   ifs.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  while(ifs) {
+    try {
+      ifs >> line;
+      readLine(line);
+    } catch(...) {
+      if(ifs.fail()) {
+        std::cout << "Something unexpected happened while reading a file." << std::endl;
+        continue;
+      } else if (ifs.bad()) {
+        std::cout << "Something serious happened while reading a file." << std::endl;
+        exit(1);
+      }
+    }
+  }
 }
 
 Stock *FileReader::loadPrices()
@@ -68,19 +107,19 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-  istringstream buffer;
+  ostringstream buffer;
   string name;
   if(argc > 1) {
     try {
       buffer.exceptions(ios_base::badbit);
       for(int i = 1; argv[i] ; i++) {
-        buffer.getline( argv[i],strlen(argv[i]) );
+        buffer << argv[i];
         if(buffer.fail()) {
-          cout << "An unexpected error occurred while reading the " << i << "th" << "file name." << endl;
+          cout << "An unexpected error occurred while reading file " << i << endl;
           buffer.clear(ios_base::goodbit);
           continue;
         }
-        readFile( argv[i] );
+        readFile( buffer );
       }
     } catch(...) {
       if(buffer.bad()) throw;
