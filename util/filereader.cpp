@@ -2,27 +2,55 @@
   The implementation file for filereader.h
 */
 #include "filereader.h"
+std::string delims = ",";
+std::string dateDelim = "-";
 
-
-void readLine( std::string line )
+void readLine( std::string &str, std::string &delims )
 {
-  Stock *stock;
-  Date *date;
+  std::vector<std::string> output;
+  std::vector<std::string> date;
+  double open, high, low, close, adjClose;
+  long vol;
+  for_each_token(str.cbegin(), str.cend(), delims.cbegin(), delims.cend(), [&output] (auto first, auto second) {
+    if( first != second ) {
+      output.emplace_back(first, second);
+    }
+  });
+  for_each_token(output[0].cbegin(), output[0].cend(), dateDelim.cbegin(), dateDelim.cend(), [&date] (auto first, auto second) {
+    if( first != second ) {
+      date.emplace_back(first, second);
+    }
+  });
+  open = stod(output[1]);
+  high = stod(output[2]);
+  low = stod(output[3]);
+  close = stod(output[4]);
+  adjClose = stod(output[5]);
+  vol = stol(output[6]);
+  std::cout << open << high << low << close << adjClose << vol << std::endl;
+  
+  /*
+  double open, high, low, close, adjClose;
+  long vol;
+  Date date;
+  
   std::istringstream iss(line);
-  std::string word;
   iss.exceptions(std::ios_base::badbit | std::ios_base::failbit);
+  std::locale spaces(std::locale::classic(), new new_delimiter);
+  iss.imbue(spaces);
+  */
+
   try {
-    std::getline(iss,word,',');
-      
+ 
   } catch(...) {
+    /*
       if(iss.fail()) {
         std::cout << "Something unexpected happened while reading a line." << std::endl;
-        continue;
-      } else if(iss.bad())
+      } else if(iss.bad()) {
         std::cout << "Something serious happened while reading a line." << std::endl;
-    }
+      }
+    */
   }
-
 
 }
 
@@ -36,7 +64,7 @@ void readFile( std::ostringstream &oss )
   while(ifs) {
     try {
       ifs >> line;
-      readLine(line);
+      readLine(line, delims);
     } catch(...) {
       if(ifs.fail()) {
         std::cout << "Something unexpected happened while reading a file." << std::endl;
@@ -109,6 +137,7 @@ int main(int argc, char *argv[])
 {
   ostringstream buffer;
   string name;
+  string line;
   if(argc > 1) {
     try {
       buffer.exceptions(ios_base::badbit);

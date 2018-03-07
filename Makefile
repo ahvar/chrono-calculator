@@ -1,5 +1,5 @@
 objects = date.o security.o portfolio.o stockList.o analyzer.o location.o bank.o filereader.o
-CFLAGS = -std=c++0x -Wall
+CFLAGS = -std=c++14 -Wall
 VPATH = util:fin
 
 modeler: $(objects)	

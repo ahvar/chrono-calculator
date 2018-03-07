@@ -7,13 +7,27 @@
 
 //#include <exception>
 #include <cstdio>
+#include <string>
+#include <iterator>
 #include <cstring>
 #include <iostream>
-#include <fstream>
 #include <locale>
 #include <ios>
+#include <algorithm>
 #include "stockList.h"
 #include "date.h"
+
+template <class InputIt, class ForwardIt, class BinOp>
+void for_each_token(InputIt first, InputIt last, ForwardIt s_first, ForwardIt s_last, BinOp binary_op)
+{
+  while(first != last) {
+    const auto pos = std::find_first_of(first, last, s_first, s_last);
+    binary_op(first, pos);
+    if( pos == last ) break;
+    first = std::next(pos);
+  }
+
+}
 
 
 /**
@@ -33,6 +47,9 @@ public:
   */
   FileReader(){}
 
+  /** FileReader destructor */
+  ~FileReader(){}
+  
   FileReader( std::string name ) { source.open(name, std::ios_base::in); sensitive = true; }
 
   /**

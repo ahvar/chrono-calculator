@@ -28,6 +28,9 @@ public:
     The default contructor for Date
   */
   Date(){}
+  
+  /** Date destructor */
+  ~Date(){}
 
   /** TODO: other useful constructors, getters, setters */
   
