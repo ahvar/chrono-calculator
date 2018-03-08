@@ -148,7 +148,10 @@ int main(int argc, char *argv[])
           buffer.clear(ios_base::goodbit);
           continue;
         }
+        std::cout << buffer.str() << std::endl;
         readFile( buffer );
+        buffer.str("");
+        buffer.clear();
       }
     } catch(...) {
       if(buffer.bad()) throw;

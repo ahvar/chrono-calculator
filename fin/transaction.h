@@ -13,13 +13,17 @@
   'date'. 
 */ 
 class Transaction {
-  
+	
+public:  
   /**
     Constructs an instance of Transaction
     @param d reference to a Date
     @param s reference to a Stock
   */
   Transaction( Date &d, Stock &s );
+
+  /** Default constructor */
+  Transaction(){}
   /**
     Transaction destructor
   */
