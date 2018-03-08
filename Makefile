@@ -1,14 +1,17 @@
-objects = date.o security.o portfolio.o stockList.o analyzer.o location.o bank.o filereader.o
+objects = date.o security.o transaction.o portfolio.o stockList.o analyzer.o location.o bank.o filereader.o
 CFLAGS = -std=c++14 -Wall
 VPATH = util:fin
 
 modeler: $(objects)	
 	g++ $(CFLAGS) $(objects) -o modeler
 
-filereader.o: filereader.cpp filereader.h analyzer.h bank.h portfolio.h stockList.h security.h location.h bank.h
+filereader.o: filereader.cpp filereader.h analyzer.h transaction.h bank.h portfolio.h stockList.h security.h location.h bank.h
 	g++ -c $(CFLAGS) $< -o $@
 
-analyzer.o: analyzer.cpp analyzer.h bank.h portfolio.h stockList.h security.h location.h date.h 
+analyzer.o: analyzer.cpp analyzer.h transaction.h bank.h portfolio.h stockList.h security.h location.h date.h 
+	g++ -c $(CFLAGS) $< -o $@
+
+transaction.o: transaction.cpp transaction.h bank.h portfolio.h stockList.h security.h location.h date.h
 	g++ -c $(CFLAGS) $< -o $@
 
 bank.o: bank.cpp bank.h portfolio.h stockList.h security.h location.h date.h

@@ -16,6 +16,8 @@ class Market {
   */
   Market(){}
 
+  ~Market();
+
   /**
     The addPriceData function accepts a pointer to a text file with historical price data.
     @param f the pointer to the file containing the price data
@@ -23,7 +25,10 @@ class Market {
   void addPriceData( FILE *f);
 
 private:
-  /** A list of stocks on the market */
-  StockList *sl; 
+  /** A list of Transactions */
+  vector<Transaction> register;
+  
+
+
 
 };
