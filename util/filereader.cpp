@@ -54,37 +54,56 @@ void readLine( std::string &str, std::string &delims )
 
 }
 
-void readFile( std::ostringstream &oss )
+StockList &FileReader::loadPrices( StockList &list )
 {
+  std::string line; // string to store a line in the file
+  std::vector<std::string> output; // vector to hold tokens from the line
+  std::vector<std::string> date; // vector to hold tokens from the date string
+  
+  /** set the source to the filename string held in buffer and set the failbit/badbit flags in source's exception mask */
+  source.open(FileReader::buffer.str());
+  source.exceptions(std::ios_base::badbit | std::ios_base::failbit);
+  source.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-  std::ifstream ifs{oss.str()};
-  std::string line;
-  ifs.exceptions(std::ios_base::badbit | std::ios_base::failbit);
-  ifs.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-  while(ifs) {
+  /** read and tokenize one line at a time from the file. tokenize the date string separately. */
+  while(source) {
+
     try {
-      ifs >> line;
-      readLine(line, delims);
+
+      source >> line;
+
+      for_each_token(line.cbegin(), line.cend(), delims.cbegin(), delims.cend(), [&output] (auto first, auto second) {
+        if( first != second ) {
+          output.emplace_back(first, second);
+        }
+      });
+
+      for_each_token(output[0].cbegin(), output[0].cend(), dateDelim.cbegin(), dateDelim.cend(), [&date] (auto first, auto second) {
+        if( first != second ) {
+          date.emplace_back(first, second);
+        }
+      });
+
+      
+      
+
     } catch(...) {
-      if(ifs.fail()) {
+
+      if(source.fail()) {
         std::cout << "Something unexpected happened while reading a file." << std::endl;
         continue;
-      } else if (ifs.bad()) {
+      } else if (source.bad()) {
         std::cout << "Something serious happened while reading a file." << std::endl;
         exit(1);
       }
+
     }
+
+    
   }
+  source.close();
 }
 
-Stock *FileReader::loadPrices()
-{
-  return NULL;
-     
-
-  
-
-}
 
 bool FileReader::isWhitespace( char c ) 
 {
@@ -131,42 +150,3 @@ bool FileReader::defineWhitespace()
   return true;
 }
 
-using namespace std;
-
-int main(int argc, char *argv[])
-{
-  ostringstream buffer;
-  string name;
-  string line;
-  if(argc > 1) {
-    try {
-      buffer.exceptions(ios_base::badbit);
-      for(int i = 1; argv[i] ; i++) {
-        buffer << argv[i];
-        if(buffer.fail()) {
-          cout << "An unexpected error occurred while reading file " << i << endl;
-          buffer.clear(ios_base::goodbit);
-          continue;
-        }
-        std::cout << buffer.str() << std::endl;
-        readFile( buffer );
-        buffer.str("");
-        buffer.clear();
-      }
-    } catch(...) {
-      if(buffer.bad()) throw;
-      else if (buffer.fail())
-        cout << "There was a problem reading the file name" << endl;
-    }
-  } else {
-    cout << "Enter filename: " << endl;
-    getline(cin,name);
-    //buffer >> name.str();
-    while(!cin.fail()) {
-      cout << "Enter filename: " << endl;
-      getline(cin,name);
-    }
-  }
-  
-  return 0;
-}

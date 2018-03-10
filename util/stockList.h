@@ -7,12 +7,7 @@
 #ifndef STOCKLIST_H_
 #define STOCKLIST_H_
 
-#include <fstream>
-#include <istream>
-#include <sstream>
-#include <ostream>
 #include <stdexcept>
-#include <vector>
 #include "../fin/security.h"
 
 class StockList {
@@ -101,11 +96,11 @@ public:
 
   /**
     Locates the first stock in the list with the price point described by the string parameter
-    @param t the price of the target Stock
+    @param t the Transaction
     @param nm the name of the stock
     @return a pointer to the Node
   */
-  Node *find( double t, std::string nm);
+  Node *find( Transaction t, std::string nm);
 
   /**
     Verifies that the list contains no elements.

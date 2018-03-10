@@ -23,7 +23,7 @@ void StockList::Node::setStock( Stock *s )
 {
   stock.setName(s->getName());
   stock.setTicker(s->getTicker());
-  stock.setValue(s->getValue());
+  //stock.setDailyHigh(s->setDailyHigh());
   stock.setQuantity(s->getQuantity());
 }
 
@@ -71,14 +71,16 @@ bool StockList::addToFront( Stock *s )
   return false;
 }
 
-StockList::Node *StockList::find( double t, std::string nm )
+StockList::Node *StockList::find( Transaction t, std::string nm )
 {
   Node *ptr = head;
+  /*
   while( ptr->succ ) {
-    if( ptr->stock.getValue() == t && ptr->stock.getName() == nm )
+    if( ptr->stock.getRecord() == t && ptr->stock.getName() == nm )
       break;
     ptr = ptr->succ;
   }
+  */
   return ptr;
 }
 

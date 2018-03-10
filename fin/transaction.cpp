@@ -4,7 +4,7 @@
 
 #include "transaction.h"
 
-Transaction::Transaction( Date &date, Stock &s )
+Transaction::Transaction( Date &date, double p )
 {
 	
 

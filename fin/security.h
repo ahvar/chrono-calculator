@@ -6,8 +6,10 @@
 #define SECURITY_H_
 
 #include <iostream>
+#include <vector>
 #include <cstdlib>
 #include <cmath>
+#include "transaction.h"
 
 /**
  The Security class represents any kind of tradable financial asset 
@@ -18,9 +20,9 @@ public:
 
   /**
     Constructor for Security. Only classes derived from Security are able to call it.
-    @param v the value of the security in USD
+    @param r a list of Transactions for this security
   */
-  Security( double v ) : value(v){} 
+  Security(  std::vector<Transaction> r ) : dailyHigh(r){} 
 
   /** 
     Default constructor for a security. Only classes derived from Security can call the default constructor for Security
@@ -36,16 +38,16 @@ public:
   virtual double getMktCap(){ return mktcap; }
 
   /**
-    Returns the value for this security
-    @return value the value of the security
+    Returns a record of the transactions for the Stock.
+    @return record the list of transactions
   */
-  double getValue(){ return value; }
+  std::vector<Transaction> &getDailyHigh(){ return dailyHigh; }
 
   /**
-    Sets the value data field to the parameter v
-    @param double v
+    Sets the record data field to the parameter v
+    @param r a record of transactions
   */
-  void setValue( double v){ value = v; }
+  void setDailyHigh( std::vector<Transaction> &dh){ dailyHigh = dh; }
 
   /**
     Prints detail about the Security
@@ -54,8 +56,17 @@ public:
 
 protected:
 
-  /** The value in USD */
-  double value; 
+  /** The highest transaction price per day */
+  std::vector<Transaction> dailyHigh; 
+  /** The opening transaction price per day */
+  std::vector<Transaction> open;
+  /** The closing transaction price per day */
+  std::vector<Transaction> close;
+  /** The lowest transaction price per day */
+  std::vector<Transaction> low;
+  /** The adjacent closing price per day */
+  std::vector<Transaction> adjClose;
+
   /** Market Capitalization */
   double mktcap;
 };
@@ -78,7 +89,7 @@ public:
     @param price the 
     @param qty the number of share to be issued by this stock
   */
-  Stock( std::string nm, std::string tkr, double price, int qty ) :  Security( price ) { 
+  Stock( std::string nm, std::string tkr, std::vector<Transaction> r, int qty ) :  Security( r ) { 
     name = nm;
     ticker = tkr;
     shares = qty;
@@ -93,24 +104,16 @@ public:
   ~Stock();
 
   /** 
-    Adds a share at the current price to the list of shares and increments 'shares'.
-    @param price the price of the share
+    Adds a Transaction to the record
+    @param t the Transaction
   */
-  void addShare( double p );
-
-  /**
-    A financial institution buys x number of shares of this stock.
-    @param fi a pointer to the financial institution buying the shares
-    @param x the number of shares to purchase
-    @return true if the FI was able to buy the shares, false otherwise
-  */
-  bool buyStock( Security *s, int x );
+  void addTransaction( Transaction &t );
   
   /** 
     Removes a share from the front, decrements the count of 'shares', and returns the price of the share.
     @return double the price 
   */
-  double removeShare();
+  bool removeTransaction();
 
   /**
     Increases the total shares outstanding by the quantity passed in as an argument. Recalculates the market capitalization.

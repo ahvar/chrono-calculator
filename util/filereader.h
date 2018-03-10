@@ -35,7 +35,7 @@ void for_each_token(InputIt first, InputIt last, ForwardIt s_first, ForwardIt s_
 */
 class FileReader {
   
-public:
+public:  
   /**
     Construct FileReader from an input file stream.
     @param f reference to input file stream
@@ -50,7 +50,7 @@ public:
   /** FileReader destructor */
   ~FileReader(){}
   
-  FileReader( std::string name ) { source.open(name, std::ios_base::in); sensitive = true; }
+  FileReader( std::string s ) { buffer.str(s); }
 
   /**
     Defines the characters to ignore when reading the input stream.
@@ -86,25 +86,19 @@ public:
   bool isCaseSensitive() { return sensitive; }
 
   operator bool();
-  
+
+  /**
+    Sets the buffer to the filename represented in the string named 's'..
+    @param s the filename
+  */
+  void setBuffer( std::string s ){ buffer.flush(); buffer.str(s); }
+
   /**
     Loads the price data and returns a list of stocks.  
     @throw exception if any problem reading files
     @return list of stocks
-  */
-  Stock *loadPrices();
-
-  /**
-    Sets the list of file pointers to FileReader's value field 'files'.
-    @param fp pointer to the first element in a list of file pointers
-  */
-  void setFiles( FILE *fp ) {  } 
-
-  /**
-    Reads a text file with price data
-    @param fn reference to string representation of filename
   */  
-  void readFile( char *fn );
+  StockList &loadPrices( StockList &list );
 
   /**
     Reads the file attached to the input file stream called source. 
@@ -130,9 +124,9 @@ public:
 private:
   
   /** Reference to i/o file stream*/
-  std::fstream source;
+  std::ifstream source;
   /** buffer to hold a line of input */
-  std::istringstream buffer;
+  std::ostringstream buffer;
   /** an array of strings */
   std::vector<std::string> words;
   /** user-defined whitespace characters */

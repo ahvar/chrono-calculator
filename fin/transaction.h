@@ -3,8 +3,6 @@
 */
 #ifndef TRANSACTION_H_
 #define TRANSACTION_H_
-
-#include "../util/stockList.h"
 #include "../util/date.h"
 
 /**
@@ -18,9 +16,9 @@ public:
   /**
     Constructs an instance of Transaction
     @param d reference to a Date
-    @param s reference to a Stock
+    @param p the exchange price
   */
-  Transaction( Date &d, Stock &s );
+  Transaction( Date &d, double p);
 
   /** Default constructor */
   Transaction(){}
@@ -32,8 +30,8 @@ public:
 private:
   /** The date */
   Date date;
-  /** The Stock */
-  Stock s;
+  /** Exchange price */
+  double price;
 
 };
 

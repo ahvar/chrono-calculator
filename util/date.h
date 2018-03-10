@@ -8,7 +8,10 @@
 
 #include <limits>
 #include <ctime>
-#include "StockList.h"
+#include <istream>
+#include <fstream>
+#include <sstream>
+#include <ostream>
 
 /**
   The Day class defines a day within the particular month of a given year
