@@ -36,16 +36,15 @@ public:
   ~Date(){}
 
   /** TODO: other useful constructors, getters, setters */
+
+
+  friend std::ifstream &operator>>(std::ifstream &is, Date &dat);
+
+  friend std::ofstream &operator<<(std::ofstream &os, const Date &dat);
   
 private:
 
   tm tm_date;
-
-  template<class charT, class Traits>
-  friend std::basic_istream<charT, Traits> &operator>>(std::basic_istream<charT, Traits> &is, Date &dat);
-
-  template<class charT, class Traits>
-  friend std::basic_ostream<charT, Traits> &operator<<(std::basic_ostream<charT, Traits> &os, const Date &dat);
 
 };
 
