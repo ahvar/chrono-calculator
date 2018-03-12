@@ -95,6 +95,10 @@ public:
     shares = qty;
   }
 
+  Stock( Transaction *t );
+
+  Stock( Transaction &t );
+
   /** Default constructor */
   Stock(){}
 

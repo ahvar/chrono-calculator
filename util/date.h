@@ -40,7 +40,7 @@ public:
 
   friend std::ifstream &operator>>(std::ifstream &is, Date &dat);
 
-  friend std::ofstream &operator<<(std::ofstream &os, const Date &dat);
+  friend std::ostream &operator<<(std::ostream &os, const Date &dat);
   
 private:
 

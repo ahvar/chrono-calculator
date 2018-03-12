@@ -58,7 +58,7 @@ StockList &FileReader::loadPrices( StockList &list )
 {
   std::string line; // string to store a line in the file
   std::vector<std::string> output; // vector to hold tokens from the line
-  std::vector<std::string> date; // vector to hold tokens from the date string (not needed shift operator used to read date)
+  //std::vector<std::string> date; // vector to hold tokens from the date string (not needed shift operator used to read date)
   Date d;
 
   /** set the source to the filename string held in buffer and set the failbit/badbit flags in source's exception mask */
@@ -68,31 +68,32 @@ StockList &FileReader::loadPrices( StockList &list )
 
   /** read and tokenize one line at a time from the file. tokenize the date string separately. */
   while(source) {
-
+    source >> d;
     try {
-      source >> d;
+      source.seekg(std::ios_base::beg);
+      source.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       //seek source beginning to reset input position before for_each_token() runs
-      
-
+      //source.clear(std::ios_base::goodbit);
+      source >> line;
       for_each_token(line.cbegin(), line.cend(), delims.cbegin(), delims.cend(), [&output] (auto first, auto second) {
         if( first != second ) {
           output.emplace_back(first, second);
         }
       });
-
-      std::istringstream is{output[0]};
-
       
-
+      list.addToFront(new Stock( new Transaction( d, std::stod(output[1]) ) ) );
+      
+      /*
       for_each_token(output[0].cbegin(), output[0].cend(), dateDelim.cbegin(), dateDelim.cend(), [&date] (auto first, auto second) {
         if( first != second ) {
           date.emplace_back(first, second);
         }
-      });
-
+      }); 
+      */
       
-      
 
+      line.clear();
+      output.clear();
     } catch(...) {
 
       if(source.fail()) {
@@ -108,6 +109,7 @@ StockList &FileReader::loadPrices( StockList &list )
     
   }
   source.close();
+  return list;
 }
 
 
