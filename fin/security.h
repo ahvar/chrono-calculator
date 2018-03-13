@@ -24,6 +24,12 @@ public:
   */
   Security(  std::vector<Transaction> r ) : dailyHigh(r){} 
 
+  Security( Transaction &t );
+
+  Security( Transaction *t );
+
+  Security( double price ){}
+
   /** 
     Default constructor for a security. Only classes derived from Security can call the default constructor for Security
   */
@@ -48,6 +54,19 @@ public:
     @param r a record of transactions
   */
   void setDailyHigh( std::vector<Transaction> &dh){ dailyHigh = dh; }
+
+  void addHigh( Transaction *t );
+
+  void addOpen( Transaction *t );
+  
+  void addClose( Transaction *t );
+  
+  void addLow( Transaction *t );
+  
+  void addAdjClose( Transaction *t ); 
+
+  void addVolume( int vol );
+
 
   /**
     Prints detail about the Security
@@ -95,9 +114,11 @@ public:
     shares = qty;
   }
 
-  Stock( Transaction *t );
+  Stock( Transaction *t ) : Security( t ){ Transaction &trans = *t; dailyHigh.push_back( trans ); }
 
-  Stock( Transaction &t );
+  Stock( Transaction &t ) : Security( t ){ dailyHigh.push_back( t ); }
+
+  Stock( std::string nm, std::string tkr, double price ) : Security( price ){}
 
   /** Default constructor */
   Stock(){}

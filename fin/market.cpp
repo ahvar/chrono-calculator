@@ -6,6 +6,13 @@ Market::Market()
   
 }
 
+Market::Market( StockList *l )
+{
+  StockList &lst = *l;
+  list = lst;
+
+}
+
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -51,5 +58,6 @@ int main(int argc, char *argv[])
     }
   }
   
+
   return 0;
 }

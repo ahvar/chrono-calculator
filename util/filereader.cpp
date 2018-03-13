@@ -56,6 +56,13 @@ void readLine( std::string &str, std::string &delims )
 
 StockList &FileReader::loadPrices( StockList &list )
 {
+
+  std::string name;
+  std::string symbol;
+  std::cout << "Enter a name and a symbol, separated by a space, for this stock: ";
+  std::cin >> name >> symbol;
+
+  Stock *s = new Stock( name, symbol, 0.0);
   std::string line; // string to store a line in the file
   std::vector<std::string> output; // vector to hold tokens from the line
   //std::vector<std::string> date; // vector to hold tokens from the date string (not needed shift operator used to read date)
@@ -80,8 +87,13 @@ StockList &FileReader::loadPrices( StockList &list )
           output.emplace_back(first, second);
         }
       });
-      
-      list.addToFront(new Stock( new Transaction( d, std::stod(output[1]) ) ) );
+
+      s->addOpen(new Transaction(d, std::stod(output[1]) ) );
+      s->addHigh( new Transaction(d, std::stod(output[2]) ) );
+      s->addLow( new Transaction(d, std::stod(output[3]) ) );
+      s->addClose(new Transaction(d, std::stod(output[4]) ) );
+      s->addAdjClose(new Transaction(d, std::stod(output[5]) ) );
+      s->addVolume( std::stoi(output[5]) );
       
       /*
       for_each_token(output[0].cbegin(), output[0].cend(), dateDelim.cbegin(), dateDelim.cend(), [&date] (auto first, auto second) {
@@ -91,9 +103,9 @@ StockList &FileReader::loadPrices( StockList &list )
       }); 
       */
       
-
       line.clear();
       output.clear();
+
     } catch(...) {
 
       if(source.fail()) {
@@ -106,8 +118,9 @@ StockList &FileReader::loadPrices( StockList &list )
 
     }
 
-    
   }
+  
+  list.addToFront(s);
   source.close();
   return list;
 }
