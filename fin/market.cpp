@@ -2,8 +2,9 @@
 
 Market::Market()
 {
-  
-  
+  StockList *s = new StockList();
+  StockList &sl = *s;
+  list = sl;
 }
 
 Market::Market( StockList *l )
@@ -27,6 +28,7 @@ int main(int argc, char *argv[])
     try {
       //fr.buffer.exceptions(ios_base::badbit);
       for(int i = 2; argv[i] ; i++) {
+      	
         fr->setBuffer(argv[i]);
         fr->loadPrices(mkt->getList());
         /*
@@ -58,6 +60,6 @@ int main(int argc, char *argv[])
     }
   }
   
-
+  std::cout << mkt->getList() << std::endl;
   return 0;
 }

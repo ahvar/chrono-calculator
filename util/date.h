@@ -38,7 +38,7 @@ public:
   /** TODO: other useful constructors, getters, setters */
 
 
-  friend std::ifstream &operator>>(std::ifstream &is, Date &dat);
+  friend std::istream &operator>>(std::istream &is, Date &dat);
 
   friend std::ostream &operator<<(std::ostream &os, const Date &dat);
   

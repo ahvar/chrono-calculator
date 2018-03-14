@@ -4,9 +4,9 @@
 #include "stockList.h"
 
 StockList::Node::Node( Stock *s )
-{
+{ 
   Node *n = new Node();
-  n->setStock(s);
+  n->setStock(s); 
 }
 
 StockList::Node::Node( Stock *s, Stock *s1, Stock *s2 )
@@ -58,7 +58,8 @@ StockList::~StockList()
 bool StockList::addToFront( Stock *s )
 {
   if ( head == NULL && length == 0 ) {
-    head = new Node(s);
+    head = new Node();
+    head->setStock(s);
     length++;
     return true;
   } else if ( head && length > 0 ) {
@@ -102,6 +103,13 @@ bool StockList::isEmpty()
   return false;
 }
 
+std::ostream &operator<<( std::ostream &os, StockList &sl )
+{
+  for(int i = 0; i < sl.length; i++ )
+    os << sl.getFirst()->stock.getName() << " " << sl.getFirst()->stock.getTicker() << std::endl;
+  return os;
+
+}
 
 
 

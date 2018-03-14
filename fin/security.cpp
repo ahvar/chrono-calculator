@@ -25,6 +25,14 @@ Security::Security( Transaction *t )
 	
 }
 
+Security::Security( double price )
+{ 
+  Date d(01,01,2016);
+  Transaction *t = new Transaction(d,price);
+  addHigh(t);
+
+}
+
 void Security::addHigh( Transaction *t )
 {
   Transaction &trans = *t;
@@ -63,5 +71,11 @@ void Security::addVolume( int vol )
 {
 
 
+}
+
+std::ostream &operator<<( std::ostream &os, Stock &s )
+{
+  os << s.getName() << " " << s.getTicker() << std::endl;
+  return os;
 }
 

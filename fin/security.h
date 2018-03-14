@@ -28,7 +28,7 @@ public:
 
   Security( Transaction *t );
 
-  Security( double price ){}
+  Security( double price );
 
   /** 
     Default constructor for a security. Only classes derived from Security can call the default constructor for Security
@@ -118,7 +118,7 @@ public:
 
   Stock( Transaction &t ) : Security( t ){ dailyHigh.push_back( t ); }
 
-  Stock( std::string nm, std::string tkr, double price ) : Security( price ){}
+  Stock( std::string nm, std::string tkr, double price ) : Security( price ) { name = nm; ticker = tkr; }
 
   /** Default constructor */
   Stock(){}

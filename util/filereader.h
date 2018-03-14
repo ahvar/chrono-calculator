@@ -104,6 +104,10 @@ public:
     Reads the file attached to the input file stream called source. 
   */
   bool defineWhitespace();
+
+  void askForName( std::string &s );
+
+  void askForSymbol( std::string &s );
   /**
     Overloads the left shift operator to read into the FileReader.
     @param ifs reference input filestream

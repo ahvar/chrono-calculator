@@ -113,6 +113,12 @@ public:
     @return pointer to last Node in the list
   */
   Node *getLast();
+
+  int getLength() { return length; }
+
+  Node *getFirst() { return head; }
+
+  friend std::ostream &operator<<( std::ostream &os, StockList &sl );
   
 
 };

@@ -1,10 +1,10 @@
 #include "date.h"
 
-std::ifstream &operator>>(std::ifstream &is, Date &dat)
+std::istream &operator>>(std::istream &is, Date &dat)
 {
 	
   int tmp;
-  is >> tmp; dat.tm_date.tm_year = tmp-1900;
+  is >> tmp; dat.tm_date.tm_year = tmp;
   is.ignore();
   is >> tmp; dat.tm_date.tm_mon = tmp;
   is.ignore();

@@ -54,19 +54,36 @@ void readLine( std::string &str, std::string &delims )
 
 }
 
+void FileReader::askForName( std::string &s )
+{
+  std::cout << "Enter a name for this stock: ";
+  std::cin >> s;
+  std::cout << std::endl;
+}
+
+void FileReader::askForSymbol( std::string &s )
+{
+  std::cout << "Enter a ticker for this stock: ";
+  std::cin >> s;
+  std::cout << std::endl;
+}
+
 StockList &FileReader::loadPrices( StockList &list )
 {
 
-  std::string name;
-  std::string symbol;
-  std::cout << "Enter a name and a symbol, separated by a space, for this stock: ";
-  std::cin >> name >> symbol;
-
+  std::string name; askForName(name);
+  std::string symbol; askForSymbol(symbol);
+  
   Stock *s = new Stock( name, symbol, 0.0);
+
+  
   std::string line; // string to store a line in the file
   std::vector<std::string> output; // vector to hold tokens from the line
-  //std::vector<std::string> date; // vector to hold tokens from the date string (not needed shift operator used to read date)
-  Date d;
+  
+  /** Date and istringstream to read from */
+  Date date;
+  std::istringstream dat; 
+  dat.exceptions(std::ios_base::badbit | std::ios_base::failbit);
 
   /** set the source to the filename string held in buffer and set the failbit/badbit flags in source's exception mask */
   source.open(FileReader::buffer.str());
@@ -75,12 +92,8 @@ StockList &FileReader::loadPrices( StockList &list )
 
   /** read and tokenize one line at a time from the file. tokenize the date string separately. */
   while(source) {
-    source >> d;
     try {
-      source.seekg(std::ios_base::beg);
-      source.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-      //seek source beginning to reset input position before for_each_token() runs
-      //source.clear(std::ios_base::goodbit);
+
       source >> line;
       for_each_token(line.cbegin(), line.cend(), delims.cbegin(), delims.cend(), [&output] (auto first, auto second) {
         if( first != second ) {
@@ -88,11 +101,27 @@ StockList &FileReader::loadPrices( StockList &list )
         }
       });
 
-      s->addOpen(new Transaction(d, std::stod(output[1]) ) );
-      s->addHigh( new Transaction(d, std::stod(output[2]) ) );
-      s->addLow( new Transaction(d, std::stod(output[3]) ) );
-      s->addClose(new Transaction(d, std::stod(output[4]) ) );
-      s->addAdjClose(new Transaction(d, std::stod(output[5]) ) );
+      /** Initialize stringstream with the date string contained at index 0 in output
+          and read it into the Date object named date */
+      try {
+        dat.str(output[0]);
+        dat >> date;
+        dat.clear();
+      } catch(...) {
+        if(dat.bad()) {
+          std::cout << "A serious error occurred reading the last date." << std::endl;
+          return list;
+        } else if (dat.fail()) {
+          std::cout << "Something unexpected happened when reading the last date." << std::endl;
+          dat.clear(std::ios_base::goodbit);
+        }
+      }
+      
+      s->addOpen(new Transaction(date, std::stod(output[1]) ) );
+      s->addHigh( new Transaction(date, std::stod(output[2]) ) );
+      s->addLow( new Transaction(date, std::stod(output[3]) ) );
+      s->addClose(new Transaction(date, std::stod(output[4]) ) );
+      s->addAdjClose(new Transaction(date, std::stod(output[5]) ) );
       s->addVolume( std::stoi(output[5]) );
       
       /*
@@ -108,7 +137,7 @@ StockList &FileReader::loadPrices( StockList &list )
 
     } catch(...) {
 
-      if(source.fail()) {
+      if(source.fail() && !source.eof()) {
         std::cout << "Something unexpected happened while reading a file." << std::endl;
         continue;
       } else if (source.bad()) {
@@ -119,9 +148,18 @@ StockList &FileReader::loadPrices( StockList &list )
     }
 
   }
-  
-  list.addToFront(s);
+
+  if(list.addToFront(s)) {
+    std::cout << list << std::endl;
+    return list;
+  }
+  else {
+    std::cout << "There was a problem adding the stock to the list." << std::endl;
+  }
+  std::cout << list << std::endl;
   source.close();
+  buffer.clear();
+
   return list;
 }
 

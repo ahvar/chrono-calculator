@@ -1,8 +1,8 @@
 # Market Modeler
-Market Modeler analyzes historical price data (daily) for a list of stocks or other tradable financial assests. The Market Modeler will output common technical indicators that can be used to determine potential entry and/or exit points to certain stocks. 
+Market Modeler analyzes historical price data for tradable financial assests and outputs common technical indicators that can be used to determine potential entry and/or exit points to certain stocks. 
 
 ## Installing
-1.) Download the files to your computer or fork the repository.
+1.) Download source files to your computer or fork the repository.
 2.) Open your terminal or preferred shell program and navigate to the directory containing Market Modeler's source files.
 3.) Compile Market Modeler on your machine by typing the **make** command in Market Modeler's root directory.
 
