@@ -68,7 +68,7 @@ void FileReader::askForSymbol( std::string &s )
   std::cout << std::endl;
 }
 
-StockList &FileReader::loadPrices( StockList &list )
+void FileReader::loadPrices( StockList &list )
 {
 
   std::string name; askForName(name);
@@ -110,7 +110,6 @@ StockList &FileReader::loadPrices( StockList &list )
       } catch(...) {
         if(dat.bad()) {
           std::cout << "A serious error occurred reading the last date." << std::endl;
-          return list;
         } else if (dat.fail()) {
           std::cout << "Something unexpected happened when reading the last date." << std::endl;
           dat.clear(std::ios_base::goodbit);
@@ -122,7 +121,7 @@ StockList &FileReader::loadPrices( StockList &list )
       s->addLow( new Transaction(date, std::stod(output[3]) ) );
       s->addClose(new Transaction(date, std::stod(output[4]) ) );
       s->addAdjClose(new Transaction(date, std::stod(output[5]) ) );
-      s->addVolume( std::stoi(output[5]) );
+      s->addVolume( std::stoi(output[6]) );
       
       /*
       for_each_token(output[0].cbegin(), output[0].cend(), dateDelim.cbegin(), dateDelim.cend(), [&date] (auto first, auto second) {
@@ -149,18 +148,10 @@ StockList &FileReader::loadPrices( StockList &list )
 
   }
 
-  if(list.addToFront(s)) {
-    std::cout << list << std::endl;
-    return list;
-  }
-  else {
-    std::cout << "There was a problem adding the stock to the list." << std::endl;
-  }
-  std::cout << list << std::endl;
+  list.addToFront(s);
   source.close();
   buffer.clear();
 
-  return list;
 }
 
 

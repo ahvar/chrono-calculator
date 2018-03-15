@@ -22,7 +22,7 @@ public:
     Constructor for Security. Only classes derived from Security are able to call it.
     @param r a list of Transactions for this security
   */
-  Security(  std::vector<Transaction> r ) : dailyHigh(r){} 
+  Security(  std::vector<Transaction> r ) : high(r){} 
 
   Security( Transaction &t );
 
@@ -43,27 +43,25 @@ public:
   */
   virtual double getMktCap(){ return mktcap; }
 
-  /**
-    Returns a record of the transactions for the Stock.
-    @return record the list of transactions
-  */
-  std::vector<Transaction> &getDailyHigh(){ return dailyHigh; }
-
-  /**
-    Sets the record data field to the parameter v
-    @param r a record of transactions
-  */
-  void setDailyHigh( std::vector<Transaction> &dh){ dailyHigh = dh; }
-
   void addHigh( Transaction *t );
 
+  std::vector<Transaction> &getHighPriceList() { return high; }
+
   void addOpen( Transaction *t );
+
+  std::vector<Transaction> &getOpenPriceList() { return open; }
   
   void addClose( Transaction *t );
+
+  std::vector<Transaction> &getClosePriceList() { return close; }
   
   void addLow( Transaction *t );
+
+  std::vector<Transaction> &getLowPriceList() { return low; }
   
   void addAdjClose( Transaction *t ); 
+
+  std::vector<Transaction> &getAdjClosePriceList() { return adjClose; }
 
   void addVolume( int vol );
 
@@ -76,7 +74,7 @@ public:
 protected:
 
   /** The highest transaction price per day */
-  std::vector<Transaction> dailyHigh; 
+  std::vector<Transaction> high; 
   /** The opening transaction price per day */
   std::vector<Transaction> open;
   /** The closing transaction price per day */
@@ -89,6 +87,10 @@ protected:
   /** Market Capitalization */
   double mktcap;
 };
+
+
+
+
 
 
 /**
@@ -114,9 +116,9 @@ public:
     shares = qty;
   }
 
-  Stock( Transaction *t ) : Security( t ){ Transaction &trans = *t; dailyHigh.push_back( trans ); }
+  Stock( Transaction *t ) : Security( t ){ Transaction &trans = *t; high.push_back( trans ); }
 
-  Stock( Transaction &t ) : Security( t ){ dailyHigh.push_back( t ); }
+  Stock( Transaction &t ) : Security( t ){ high.push_back( t ); }
 
   Stock( std::string nm, std::string tkr, double price ) : Security( price ) { name = nm; ticker = tkr; }
 

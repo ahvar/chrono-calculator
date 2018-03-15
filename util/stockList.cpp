@@ -103,10 +103,28 @@ bool StockList::isEmpty()
   return false;
 }
 
+Stock &StockList::stockAt( int i )
+{
+  Node *ptr = head;
+  if( i <= length ) {
+    int idx = 0;
+    while( idx != i-1) {
+      ptr = ptr->prev;
+      idx++;
+    }
+  }
+  return ptr->stock;
+
+}
+
 std::ostream &operator<<( std::ostream &os, StockList &sl )
 {
-  for(int i = 0; i < sl.length; i++ )
-    os << sl.getFirst()->stock.getName() << " " << sl.getFirst()->stock.getTicker() << std::endl;
+  if(sl.length == 1)
+    os << sl.getFirst()->stock;
+  else {
+    for(int i = 0; i < sl.length; i++ ) 
+      os << sl.stockAt(i);
+  }
   return os;
 
 }

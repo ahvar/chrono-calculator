@@ -18,3 +18,8 @@ Transaction::~Transaction()
 
 }
 
+std::ostream &operator<<(std::ostream &os, Transaction &t )
+{
+  os << t.date << " " << t.price << std::endl; 
+  return os;
+}

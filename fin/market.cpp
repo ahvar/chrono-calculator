@@ -19,18 +19,16 @@ using namespace std;
 int main(int argc, char *argv[])
 { 
   Market *mkt = new Market();
+  FileReader fr;
+  ;
   if(argc > 1) {
 
-  	/** new FileReader created from the first filename in the argument vector. load the price data into the StockList */
-  	FileReader *fr = new FileReader(argv[1]);
-    fr->loadPrices(mkt->getList());
-
     try {
-      //fr.buffer.exceptions(ios_base::badbit);
-      for(int i = 2; argv[i] ; i++) {
+
+      for(int i = 1; argv[i] ; i++) {
       	
-        fr->setBuffer(argv[i]);
-        fr->loadPrices(mkt->getList());
+        fr.setBuffer(argv[i]);
+        fr.loadPrices(mkt->getList());
         /*
         if(buffer.fail()) {
           cout << "An unexpected error occurred while reading file " << i << endl;

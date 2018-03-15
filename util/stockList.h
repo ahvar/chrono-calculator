@@ -37,6 +37,9 @@ private:
       @param s a pointer to the stock
     */
     void setStock( Stock *s);
+
+    Stock &getStock() { return stock; }
+
     /** The stock */  
     Stock stock;
     /** Pointer to the previous Node */
@@ -117,6 +120,8 @@ public:
   int getLength() { return length; }
 
   Node *getFirst() { return head; }
+
+  Stock &stockAt( int i );
 
   friend std::ostream &operator<<( std::ostream &os, StockList &sl );
   

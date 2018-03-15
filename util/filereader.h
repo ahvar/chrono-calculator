@@ -98,7 +98,7 @@ public:
     @throw exception if any problem reading files
     @return list of stocks
   */  
-  StockList &loadPrices( StockList &list );
+  void loadPrices( StockList &list );
 
   /**
     Reads the file attached to the input file stream called source. 

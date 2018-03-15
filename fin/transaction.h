@@ -27,6 +27,8 @@ public:
   */
   ~Transaction();
 
+  friend std::ostream &operator<<(std::ostream &os, Transaction &t );
+
 private:
   /** The date */
   Date date;
