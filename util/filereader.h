@@ -88,10 +88,27 @@ public:
   operator bool();
 
   /**
-    Sets the buffer to the filename represented in the string named 's'..
+    Sets the buffer to the filename represented in the string named 's'.
     @param s the filename
   */
   void setBuffer( std::string s ){ buffer.flush(); buffer.str(s); }
+
+  /**
+     Creates a Transaction from each string in the vector and adds it to 
+     the appropriate price list in Stock.
+
+     @param s the Stock that Transactions will be added to
+     @param str the vector of strings 
+  */
+  void toTransactionFromString( Stock &s, std::vector<std::string> &str, Date &date );
+
+  /**
+    Reads a Date from an input stringstream
+
+    @param s reference to a vector of strings
+    @return a Date
+  */
+  Date toDateFromString( std::vector<std::string> &output );
 
   /**
     Loads the price data and returns a list of stocks.  

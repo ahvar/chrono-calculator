@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 { 
   Market *mkt = new Market();
   FileReader fr;
-  ;
+  
   if(argc > 1) {
 
     try {
@@ -58,6 +58,6 @@ int main(int argc, char *argv[])
     }
   }
   
-  std::cout << mkt->getList() << std::endl;
+  //std::cout << mkt->getList() << std::endl;
   return 0;
 }

@@ -108,8 +108,8 @@ Stock &StockList::stockAt( int i )
   Node *ptr = head;
   if( i <= length ) {
     int idx = 0;
-    while( idx != i-1) {
-      ptr = ptr->prev;
+    while( idx != i-1  ) {
+      ptr = ptr->succ;
       idx++;
     }
   }
@@ -119,11 +119,10 @@ Stock &StockList::stockAt( int i )
 
 std::ostream &operator<<( std::ostream &os, StockList &sl )
 {
-  if(sl.length == 1)
-    os << sl.getFirst()->stock;
-  else {
-    for(int i = 0; i < sl.length; i++ ) 
-      os << sl.stockAt(i);
+  StockList::Node *ptr = sl.getFirst();
+  while( ptr ) {
+    os << ptr->stock << std::endl;
+    ptr = ptr->succ;
   }
   return os;
 

@@ -1,6 +1,5 @@
 /**
-  Defines the classes for different types of tradable financial assets. At the most basic level, a Security has a value
-  and a market capitalization. Security is an abstract class and is the base class for Stock.
+  Declares the classes for abtract type Security and concrete class Stock, which inherits from Security. 
 */
 #ifndef SECURITY_H_
 #define SECURITY_H_
@@ -12,8 +11,9 @@
 #include "transaction.h"
 
 /**
- The Security class represents any kind of tradable financial asset 
-*/
+ * A Security has several lists of Transactions representing individual trades. Security is an abstract class 
+ * and is the base class for Stock.
+ */
 class Security {
 
 public:
@@ -43,24 +43,64 @@ public:
   */
   virtual double getMktCap(){ return mktcap; }
 
-  void addHigh( Transaction *t );
+  /**
+    Adds a Transaction to the high price list
+    @param t a reference to the Transaction
+  */
+  void addHigh( Transaction &t );
 
+  /**
+    Returns a reference to the high price list
+    @return a reference to the high price list.
+  */
   std::vector<Transaction> &getHighPriceList() { return high; }
 
-  void addOpen( Transaction *t );
+  /**
+    Adds a Transaction to the opening price list
+    @param t a reference to the Transaction
+  */
+  void addOpen( Transaction &t );
 
+    /**
+    Returns a reference to the opening price list
+    @return a reference to the opening price list.
+  */
   std::vector<Transaction> &getOpenPriceList() { return open; }
   
-  void addClose( Transaction *t );
+  /**
+    Adds a Transaction to the closing price list
+    @param t a reference to the Transaction
+  */
+  void addClose( Transaction &t );
 
+    /**
+    Returns a reference to the closing price list
+    @return a reference to the closing price list.
+  */
   std::vector<Transaction> &getClosePriceList() { return close; }
   
-  void addLow( Transaction *t );
+  /**
+    Adds a Transaction to the low price list
+    @param t a reference to the Transaction
+  */
+  void addLow( Transaction &t );
 
+  /**
+    Returns a reference to the low price list
+    @return a reference to the low price list.
+  */
   std::vector<Transaction> &getLowPriceList() { return low; }
   
-  void addAdjClose( Transaction *t ); 
+  /**
+    Adds a Transaction to the adjacent close price list
+    @param t a reference to the Transaction
+  */
+  void addAdjClose( Transaction &t ); 
 
+  /**
+    Returns a reference to the adjacent close price list
+    @return a reference to the adjacent close price list.
+  */
   std::vector<Transaction> &getAdjClosePriceList() { return adjClose; }
 
   void addVolume( int vol );
@@ -116,9 +156,9 @@ public:
     shares = qty;
   }
 
-  Stock( Transaction *t ) : Security( t ){ Transaction &trans = *t; high.push_back( trans ); }
+  Stock( Transaction *t ) : Security( t ){ }
 
-  Stock( Transaction &t ) : Security( t ){ high.push_back( t ); }
+  Stock( Transaction &t ) : Security( t ){ }
 
   Stock( std::string nm, std::string tkr, double price ) : Security( price ) { name = nm; ticker = tkr; }
 

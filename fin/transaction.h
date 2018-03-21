@@ -4,6 +4,7 @@
 #ifndef TRANSACTION_H_
 #define TRANSACTION_H_
 #include "../util/date.h"
+#include <iomanip>
 
 /**
   The Transaction class represents the exchange of the Stock represented by the Stock private data field, the instance
@@ -18,7 +19,7 @@ public:
     @param d reference to a Date
     @param p the exchange price
   */
-  Transaction( Date &d, double p);
+  Transaction( Date d, double p);
 
   /** Default constructor */
   Transaction(){}
